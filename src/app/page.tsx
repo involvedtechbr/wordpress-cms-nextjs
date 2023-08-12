@@ -5,5 +5,5 @@ export default function Home() {
         <h1>WordPress CMS com Next.js.</h1>
       </div>
     </main>
-  )
+  );
 }
