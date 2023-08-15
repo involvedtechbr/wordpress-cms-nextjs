@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "compose": "docker-compose --env-file ./.env.local up -d",
     "lint": "next lint",
     "prettier:format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "prettier:check": "prettier --check  \"**/*.{ts,tsx,md}\""
