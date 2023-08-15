@@ -1,9 +1,19 @@
-export default function Home() {
+import loadSerializableQuery from '@/lib/relay/loadSerializableQuery';
+import { SerializablePreloadedQuery } from '@/lib/relay/loadSerializableQuery';
+import indexPageQueryNode, { indexPageQuery } from '@/__generated__/indexPageQuery.graphql';
+import MainViewClientComponent from './MainViewClientComponent';
+
+export default async function Home(props: {
+  preloadedQuery: SerializablePreloadedQuery<typeof indexPageQueryNode, indexPageQuery>;
+}) {
+  const preloadedQuery = await loadSerializableQuery<typeof indexPageQueryNode, indexPageQuery>(
+    indexPageQueryNode.params,
+    {},
+  );
+
   return (
     <main>
-      <div>
-        <h1>WordPress CMS com Next.js.</h1>
-      </div>
+      <MainViewClientComponent preloadedQuery={preloadedQuery} />
     </main>
   );
 }
