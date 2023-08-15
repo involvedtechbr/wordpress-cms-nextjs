@@ -8,6 +8,11 @@
 # testing
 /coverage
 
+# WordPress
+db_data
+wordpress
+plugins
+
 # next.js
 /.next/
 /out/
