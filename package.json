@@ -6,10 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "relay": "relay-compiler",
     "compose": "docker-compose --env-file ./.env.local up -d",
     "lint": "next lint",
-    "prettier:format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "prettier:check": "prettier --check  \"**/*.{ts,tsx,md}\""
+    "prettier:format": "prettier --write \"**/*.{ts,tsx,md,js,jsx}\" '!./db_data'",
+    "prettier:check": "prettier --check  \"**/*.{ts,tsx,md,js,jsx}\" '!./db_data'"
   },
   "dependencies": {
     "@types/node": "20.5.0",
@@ -22,12 +23,17 @@
     "postcss": "8.4.27",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-relay": "^15.0.0",
+    "relay-runtime": "^15.0.0",
     "tailwindcss": "3.3.3",
     "typescript": "5.1.6"
   },
   "devDependencies": {
+    "@types/react-relay": "^14.1.4",
+    "@types/relay-runtime": "^14.1.12",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.0",
-    "prettier": "^3.0.1"
+    "prettier": "^3.0.1",
+    "relay-compiler": "^15.0.0"
   }
 }

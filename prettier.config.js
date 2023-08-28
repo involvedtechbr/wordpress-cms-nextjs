@@ -6,5 +6,5 @@ const config = {
   arrowParens: 'avoid',
   printWidth: 120,
 };
-  
+
 module.exports = config;
