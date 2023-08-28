@@ -1,18 +1,18 @@
 'use client';
 
-import MainView from '@/components/MainView';
+import Header from '@/components/Header/Header';
 import { useRelayEnvironment } from 'react-relay';
 import { SerializablePreloadedQuery } from '@/lib/relay/loadSerializableQuery';
-import MainViewQueryNode, { MainViewQuery } from '@/__generated__/MainViewQuery.graphql';
+import HeaderQueryNode, { HeaderQuery } from '@/__generated__/HeaderQuery.graphql';
 import useSerializablePreloadedQuery from '@/lib/relay/useSerializablePreloadedQuery';
 
-const MainViewClientComponent = (props: {
-  preloadedQuery: SerializablePreloadedQuery<typeof MainViewQueryNode, MainViewQuery>;
+const HeaderClientComponent = (props: {
+  preloadedQuery: SerializablePreloadedQuery<typeof HeaderQueryNode, HeaderQuery>;
 }) => {
   const environment = useRelayEnvironment();
   const queryRef = useSerializablePreloadedQuery(environment, props.preloadedQuery);
 
-  return <MainView queryRef={queryRef} />;
+  return <Header queryRef={queryRef} />;
 };
 
-export default MainViewClientComponent;
+export default HeaderClientComponent;

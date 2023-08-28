@@ -2249,6 +2249,9 @@ enum PostObjectsConnectionOrderbyEnum {
 
 """The status of the object."""
 enum PostStatusEnum {
+  """Objects with the acf-disabled status"""
+  ACF_DISABLED
+
   """Objects with the auto-draft status"""
   AUTO_DRAFT
 
@@ -5280,6 +5283,9 @@ enum MediaItemSizeEnum {
   """MediaItem with the medium_large size"""
   MEDIUM_LARGE
 
+  """MediaItem with the post-thumbnail size"""
+  POST_THUMBNAIL
+
   """MediaItem with the thumbnail size"""
   THUMBNAIL
 
@@ -5563,6 +5569,11 @@ type Page implements Node & ContentNode & UniformResourceIdentifiable & Database
 
   """The globally unique identifier of the author of the node"""
   authorId: ID
+
+  """
+  Added to the GraphQL Schema because the ACF Field Group &quot;Banner&quot; was set to Show in GraphQL.
+  """
+  banner: Page_Banner
 
   """
   Connection between the HierarchicalContentNode type and the ContentNode type
@@ -5917,6 +5928,27 @@ interface NodeWithPageAttributes implements Node {
   A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types.
   """
   menuOrder: Int
+}
+
+"""Field Group"""
+type Page_Banner implements AcfFieldGroup {
+  """"""
+  bannerImage: MediaItem
+
+  """"""
+  descricao: String
+
+  """The name of the ACF Field Group"""
+  fieldGroupName: String
+
+  """"""
+  titulo: String
+}
+
+"""A Field Group registered by ACF"""
+interface AcfFieldGroup {
+  """The name of the ACF Field Group"""
+  fieldGroupName: String
 }
 
 """Arguments for filtering the PageToCommentConnection connection"""
@@ -7102,7 +7134,7 @@ interface PostFormatConnectionEdge implements Edge {
 }
 
 """The postFormat type"""
-type PostFormat implements Node & TermNode & UniformResourceIdentifiable & DatabaseIdentifier {
+type PostFormat implements Node & TermNode & UniformResourceIdentifiable & DatabaseIdentifier & MenuItemLinkable {
   """Connection between the PostFormat type and the ContentNode type"""
   contentNodes(
     """The number of items to return after the referenced "after" cursor"""
@@ -9435,8 +9467,11 @@ type Menu implements Node & DatabaseIdentifier {
 
 """Registered menu locations"""
 enum MenuLocationEnum {
-  """Empty menu location"""
-  EMPTY
+  """Put the menu in the footer location"""
+  FOOTER
+
+  """Put the menu in the primary location"""
+  PRIMARY
 }
 
 """Arguments for filtering the MenuToMenuItemConnection connection"""
@@ -9669,7 +9704,7 @@ interface MenuItemLinkableConnectionEdge implements Edge {
 }
 
 """Deprecated in favor of MenuItemLinkeable Interface"""
-union MenuItemObjectUnion = Post | Page | Category | Tag
+union MenuItemObjectUnion = Post | Page | Category | Tag | PostFormat
 
 """Connection between the MenuItem type and the Menu type"""
 type MenuItemToMenuConnectionEdge implements OneToOneConnection & Edge & MenuConnectionEdge {
@@ -13034,18 +13069,6 @@ type CommentAuthor implements Node & Commenter & DatabaseIdentifier {
 
 """The template assigned to the node"""
 type DefaultTemplate implements ContentTemplate {
-  """The name of the template"""
-  templateName: String
-}
-
-"""The template assigned to the node"""
-type Template_Vazio implements ContentTemplate {
-  """The name of the template"""
-  templateName: String
-}
-
-"""The template assigned to the node"""
-type Template_BlogAlternativo implements ContentTemplate {
   """The name of the template"""
   templateName: String
 }
